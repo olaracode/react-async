@@ -1,26 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
+import RickAndMorty from "./RickAndMorty";
+import Post from "./Post";
 
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
+// El metodo post se utiliza solo para crear el usuario
 
-//create your first component
 const Home = () => {
-	return (
-		<div className="text-center">
-			<h1 className="text-center mt-5">Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working...
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
-		</div>
-	);
+  const [isShowing, setIsShowing] = useState("rick");
+  const setPost = () => setIsShowing("post");
+  const setRick = () => setIsShowing("rick");
+
+  return (
+    <div>
+      <div className="d-flex my-5 container justify-content-between">
+        <button
+          onClick={setRick}
+          className={`btn btn-primary ${isShowing === "rick" && "active"}`}
+        >
+          Ver Rick y morty
+        </button>
+        <button
+          className={`btn btn-primary ${isShowing === "post" && "active"}`}
+          onClick={setPost}
+        >
+          Ver Post
+        </button>
+      </div>
+      {isShowing === "rick" && <RickAndMorty />}
+      {isShowing === "post" && <Post />}
+    </div>
+  );
 };
 
 export default Home;
